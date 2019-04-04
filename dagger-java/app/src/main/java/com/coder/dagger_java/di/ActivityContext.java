@@ -12,6 +12,6 @@ import javax.inject.Qualifier;
  * we have to explicitly specify the identifier for it.
  */
 @Qualifier
-@Retention(RetentionPolicy.RUNTIME)
+@Retention(RetentionPolicy.RUNTIME) //why is there a need to mention this
 public @interface ActivityContext {
 }
