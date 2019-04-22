@@ -55,8 +55,8 @@ class MainActivity : AppCompatActivity() {
     private fun getUser() {
         try {
             val user = dataManager.getUser(1)
-            tv_user_info.text = user.name
-            Log.d("MainActivity", user.name)
+            tv_user_info.text = user.toString()
+
         } catch (e: Exception) {
             e.printStackTrace()
         }

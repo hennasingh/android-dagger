@@ -46,11 +46,13 @@ class DbHelper @Inject constructor(
     private fun tableCreateStatements(db: SQLiteDatabase?) {
 
         try {
-            val create_table = "CREATE TABLE IF NOT EXISTS " + USER_TABLE_NAME + "(" +
-                    USER_COLUMN_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT" +
+            val create_table = "CREATE TABLE " + USER_TABLE_NAME + " (" +
+                    USER_COLUMN_USER_ID + " INTEGER PRIMARY KEY, " +
                     USER_COLUMN_USER_NAME + " TEXT, " +
-                    USER_COLUMN_USER_ADDRESS + " TEXT, " + ")"
-            Log.d("DbHelper", create_table)
+                    USER_COLUMN_USER_ADDRESS + " TEXT, " +
+                    USER_COLUMN_USER_CREATED_AT + " TEXT, " +
+                    USER_COLUMN_USER_UPDATED_AT + " TEXT)"
+            Log.d("DBHELPER", create_table)
             db?.execSQL(
                 create_table
             )
@@ -70,6 +72,8 @@ class DbHelper @Inject constructor(
             contentValues.put(USER_COLUMN_USER_ID, user.id)
             contentValues.put(USER_COLUMN_USER_NAME, user.name)
             contentValues.put(USER_COLUMN_USER_ADDRESS, user.address)
+            contentValues.put(USER_COLUMN_USER_CREATED_AT, getCurrentTimeStamp())
+            contentValues.put(USER_COLUMN_USER_UPDATED_AT, getCurrentTimeStamp())
             db.insert(USER_TABLE_NAME, null, contentValues)
             db.close()
         } catch (e: Exception) {
@@ -113,5 +117,8 @@ class DbHelper @Inject constructor(
             cursor?.close()
         }
     }
+
+    private fun getCurrentTimeStamp() = (System.currentTimeMillis() / 1000).toString()
+
 
 }

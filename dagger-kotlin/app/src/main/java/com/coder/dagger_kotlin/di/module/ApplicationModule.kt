@@ -23,7 +23,7 @@ class ApplicationModule constructor(var application: Application) {
 
     @Provides
     @DatabaseInfo
-    fun provideDatabaseVersion() = 2
+    fun provideDatabaseVersion() = 1
 
     @Provides
     fun provideSharedPrefs() = application.getSharedPreferences("demo-prefs", Context.MODE_PRIVATE)
